@@ -13,6 +13,7 @@ public class Continent
     {
         foreach (Territory t in territories)
         {
+            playerOwner = null;
             if (t.player != territories[0].player) return false;
         }
 
