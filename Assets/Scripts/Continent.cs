@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Continent
 {
+    public string name;
     public int armiesGiven;
     public List<Territory> territories;
     public string playerOwner;
