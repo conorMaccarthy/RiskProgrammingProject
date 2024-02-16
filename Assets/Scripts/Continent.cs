@@ -28,10 +28,11 @@ public class Continent
         return true;
 
     }
-    public Continent(int initArmiesGiven, List<Territory> initTerritories)
+    public Continent(string initName, int initArmiesGiven, List<Territory> initTerritories)
     {
         armiesGiven = initArmiesGiven;
         territories = initTerritories;
+        name = initName;
     }
 
     public string getTerritoryOwner(int index)
