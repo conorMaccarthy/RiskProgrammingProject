@@ -4,31 +4,6 @@ using UnityEngine;
 
 public class TestScript : MonoBehaviour
 {
-    class Territory
-    {
-        public string name;
-        public int currentArmyCount;
-        public List<Territory> adjacentTerritoryList;
-
-        public Territory(string initName, int initArmyCount)
-        {
-            name = initName;
-            currentArmyCount = initArmyCount;
-        }
-    }
-
-    class Continent
-    {
-        public int armiesGiven;
-        public List<Territory> territories;
-
-        public Continent(int initArmiesGiven, List<Territory> initTerritories)
-        {
-            armiesGiven = initArmiesGiven;
-            territories = initTerritories;
-        }
-    }
-
     private void Start()
     {
         Territory alaska = new Territory("Alaska", 0);
