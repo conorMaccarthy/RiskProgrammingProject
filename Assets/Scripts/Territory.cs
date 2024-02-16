@@ -5,7 +5,7 @@ using UnityEngine;
 public class Territory
 {
     public string name;
-    public string player;
+    public string player = "";
     public int currentArmyCount;
     public List<Territory> adjacentTerritoryList; //This list does not appear in the constructor, rather it is initialized shortly after all the Territories have been made
 

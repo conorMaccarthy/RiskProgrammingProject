@@ -7,7 +7,7 @@ public class Continent
     public string name;
     public int armiesGiven;
     public List<Territory> territories;
-    public string playerOwner;
+    public string playerOwner = "";
 
 
     public bool isOwned() //returns if every territory within is owned by the same player, thus making this continent owned.
