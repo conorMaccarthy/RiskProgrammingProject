@@ -5,6 +5,7 @@ using UnityEngine;
 public class Territory
 {
     public string name;
+    public string player;
     public int currentArmyCount;
     public List<Territory> adjacentTerritoryList; //This list does not appear in the constructor, rather it is initialized shortly after all the Territories have been made
 
@@ -13,7 +14,7 @@ public class Territory
         name = initName;
         currentArmyCount = initArmyCount;
     }
-
+    /*
     public void Attack(Territory territoryToAttack)
     {
         int attackingDice = 0; //Attacking dice are gotten from the number of attacking armies up to a maximum of 3
@@ -87,5 +88,5 @@ public class Territory
     private int RollDice()
     {
         return Random.Range(1, 6);
-    }
+    } */
 }
