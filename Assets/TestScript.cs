@@ -26,18 +26,27 @@ public class TestScript : MonoBehaviour
         easternUnitedStates.adjacentTerritoryList = new List<Territory> { westernUnitedStates, centralAmerica, ontario, quebec };
         centralAmerica.adjacentTerritoryList = new List<Territory> { westernUnitedStates, easternUnitedStates }; //Add Venezuela when made
 
-        Continent northAmerica = new Continent(5, new List<Territory> { alaska, northWestTerritory, alberta, greenland, ontario, quebec, westernUnitedStates, easternUnitedStates, centralAmerica });
+        Continent northAmerica = new Continent("North America", 5, new List<Territory> { alaska, northWestTerritory, alberta, greenland, ontario, quebec, westernUnitedStates, easternUnitedStates, centralAmerica });
 
-        Debug.Log("Territories in North America:");
+        //Debug.Log("Territories in North America:");
         for (int i = 0; i < northAmerica.territories.Count; i++)
         {
-            Debug.Log(northAmerica.territories[i].name);
+            //Debug.Log(northAmerica.territories[i].name);
         }
 
-        Debug.Log("Adjacent territories to Ontario:");
+        //Debug.Log("Adjacent territories to Ontario:");
         for (int i = 0; i < ontario.adjacentTerritoryList.Count; i++)
         {
-            Debug.Log(ontario.adjacentTerritoryList[i].name);
+            //Debug.Log(ontario.adjacentTerritoryList[i].name);
         }
+
+        Player player = new Player();
+
+        player.availableArmies = 10;
+        player.ownedTerritories = new List<Territory> { alberta, greenland, ontario };
+
+        alberta.currentArmyCount = 4;
+        westernUnitedStates.currentArmyCount = 2;
+        player.Attack(westernUnitedStates, alberta);
     }
 }
