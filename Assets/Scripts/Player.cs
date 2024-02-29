@@ -7,6 +7,10 @@ public class Player
     public int availableArmies;
     public List<Territory> ownedTerritories;
     public List<Continent> ownedContinents;
+    public bool isPlaying;
+    
+    //public List<Card> heldCards;
+    //To be added when card functionality is made
 
     public void AddArmies(int armiesAdded)
     {
@@ -131,6 +135,19 @@ public class Player
         territoryToFortify.currentArmyCount += armiesAdded;
         availableArmies -= armiesAdded;
         Debug.Log(territoryToFortify.name + " has been fortified with " + armiesAdded + " armies");
+    }
+
+    public void Reinforce(Territory territoryGiving, Territory territoryTaking, int armiesMoving)
+    {
+        if (armiesMoving > territoryGiving.currentArmyCount - 1)
+        {
+            Debug.Log("Territory cannot give up that many armies");
+            return;
+        }
+        
+        territoryGiving.currentArmyCount -= armiesMoving;
+        territoryTaking.currentArmyCount += armiesMoving;
+        Debug.Log(territoryTaking.name + " has been reinforced with " + armiesMoving + " armies");
     }
 
     private int RollDice()
