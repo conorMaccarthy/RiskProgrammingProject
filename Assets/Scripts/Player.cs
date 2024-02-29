@@ -122,7 +122,14 @@ public class Player
 
     public void Fortify(int armiesAdded, Territory territoryToFortify)
     {
+        if (armiesAdded > availableArmies)
+        {
+            Debug.Log("Player does not have enough armies to fortify");
+            return;
+        }
+        
         territoryToFortify.currentArmyCount += armiesAdded;
+        availableArmies -= armiesAdded;
         Debug.Log(territoryToFortify.name + " has been fortified with " + armiesAdded + " armies");
     }
 
