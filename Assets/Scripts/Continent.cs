@@ -28,6 +28,13 @@ public class Continent
         return true;
 
     }
+
+    public Continent(string initName, int initArmiesGiven)
+    {
+        armiesGiven = initArmiesGiven;
+        name = initName;
+        territories = new List<Territory>();
+    }
     public Continent(string initName, int initArmiesGiven, List<Territory> initTerritories)
     {
         armiesGiven = initArmiesGiven;
@@ -35,7 +42,7 @@ public class Continent
         name = initName;
     }
 
-    public string getTerritoryOwner(int index)
+    public string GetTerritoryOwner(int index)
     {
         if (territories.Count < index)
             return territories[index].player;

@@ -1,0 +1,3 @@
+NorthAmerica,5
+Alaska,1.5,-1
+NorthWestTerritories,3.5,-1.2

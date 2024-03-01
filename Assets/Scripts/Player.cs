@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Player
 {
+    public string playerName;
     public int availableArmies;
-    public List<Territory> ownedTerritories;
-    public List<Continent> ownedContinents;
+    public List<Territory> ownedTerritories; //redundant?
+    public List<Continent> ownedContinents; //redundant?
     public bool isPlaying;
     
     //public List<Card> heldCards;
@@ -122,6 +123,16 @@ public class Player
 
         Debug.Log("Remaining armies in " + territoryAttackingFrom.name + ": " + territoryAttackingFrom.currentArmyCount);
         Debug.Log("Armies remaining in " + territoryToAttack.name + ": " + territoryToAttack.currentArmyCount);
+
+        if (territoryToAttack.currentArmyCount == 0 && territoryAttackingFrom.currentArmyCount > 1) //redundant check on attacking army.
+        {
+            Debug.Log("Country takeOver commences. Please move some soliders:");
+            //requires gameplay management class for input
+            int soldiersToPass = territoryAttackingFrom.currentArmyCount - 1; //would be selected by player. for now, you pass max possible
+            territoryToAttack.player = playerName;
+            Reinforce(territoryAttackingFrom, territoryToAttack, soldiersToPass);
+            
+        }
     }
 
     public void Fortify(int armiesAdded, Territory territoryToFortify)
@@ -144,10 +155,48 @@ public class Player
             Debug.Log("Territory cannot give up that many armies");
             return;
         }
-        
+
+        if (!AreTerritoriesConnected(territoryGiving,territoryTaking,playerName)) //"Among countries that share a common border" So not an unbroken link between countries, but just two adjacent countries?
+        {
+            Debug.Log("Error: Territories not connected");
+            return;
+        }
+
         territoryGiving.currentArmyCount -= armiesMoving;
         territoryTaking.currentArmyCount += armiesMoving;
         Debug.Log(territoryTaking.name + " has been reinforced with " + armiesMoving + " armies");
+    }
+
+    public bool AreTerritoriesConnected(Territory currentSearch,Territory targetOut, string player)
+    {
+        //needs to determine wether a path can be drawn of territories owned by one player from source to target.
+        List<Territory> uncheckedList= new List<Territory>();
+        List<Territory> checkedList= new List<Territory>();
+
+        uncheckedList.Add(currentSearch); //origin?
+        while (uncheckedList.Count > 0)
+        {
+            //Debug.Log("checkedList length:" + checkedList.Count); leaving this here for debugging if it breaks later
+            //move territory of choice to be checked
+            Territory store = uncheckedList[0]; 
+            uncheckedList.Remove(store);
+            checkedList.Add(store);
+            foreach(Territory ter in store.adjacentTerritoryList) //comb through all attached territories
+            {
+                //Debug.Log("Checking ter:" + ter.name);
+                if (ter.player == player)
+                {
+                    if (ter == targetOut)
+                        return true;
+
+                    if (!checkedList.Contains(ter)) //avoid duplicates
+                        uncheckedList.Add(ter);
+                }
+            }
+
+        }
+        
+        return false; //path cannot be made
     }
 
     private int RollDice()
