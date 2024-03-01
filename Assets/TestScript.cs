@@ -9,6 +9,8 @@ public class TestScript : MonoBehaviour
         GetComponent<Map>().ReadMapFile();
         Territory alaska = GetComponent<Map>().continents[0].territories[0];
         Territory t2 = GetComponent<Map>().continents[0].territories[1];
+        Territory t3 = GetComponent<Map>().continents[1].territories[0];
+        Territory t4 = GetComponent<Map>().continents[1].territories[1];
         //Territory northWestTerritory = new Territory("North West Territory", "Player1", 0);
         //Territory alberta = new Territory("Alberta", "Player1", 0);
         //Territory greenland = new Territory("Greenland", "Player1", 0);
@@ -22,13 +24,14 @@ public class TestScript : MonoBehaviour
         //northWestTerritory.player = "Player1";
         alaska.player = "Player1";
         t2.player = "Player3";
+        t3.player = "Player2";
         //greenland.player = "Player1";
         //ontario.player = "Player2";
         //quebec.player = "Player1";
         //westernUnitedStates.player = "Player1";
         //easternUnitedStates.player = "Player3";
         //centralAmerica.player = "Player 4";
-        
+
 
         //alaska.adjacentTerritoryList = new List<Territory> { northWestTerritory, alberta };
         //northWestTerritory.adjacentTerritoryList = new List<Territory> { alaska, alberta, ontario, greenland };

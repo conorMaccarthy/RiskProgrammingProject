@@ -45,6 +45,9 @@ public class Map:MonoBehaviour //for unity visuals, I need some functions.
                         case "Player4":
                             drawPool[objectCount - 1].GetComponent<Renderer>().material.color = new Color(1, 1, 0, 1);
                             break;
+                        case "Unowned":
+                            drawPool[objectCount - 1].GetComponent<Renderer>().material.color = new Color(0.5f, 0.5f, 0.5f, 1);
+                            break;
                     }
                 }
             }
