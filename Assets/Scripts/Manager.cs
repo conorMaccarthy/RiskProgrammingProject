@@ -7,7 +7,9 @@ using Debug = UnityEngine.Debug;
 public class Manager : MonoBehaviour
 {
     private int playerCount;
-    
+
+    Map mapRef;
+
     Player[] player;
 
     void Start()
@@ -15,12 +17,15 @@ public class Manager : MonoBehaviour
         //For 3 players, Army count is 35, 4 players 30, 5 players 25
         playerCount = 3; //For now, will implement button to adjust this
 
-        GetComponent<Map>().ReadMapFile();
+        mapRef = GetComponent<Map>();
+        mapRef.ReadMapFile();
 
 
 
         Player player = new Player();
         player.playerName = "Player1";
+
+        InitialGameState();
 
         GetComponent<Map>().DrawMap();
     }
@@ -35,7 +40,35 @@ public class Manager : MonoBehaviour
             player[i].isPlaying = true;
         }
 
+        
         //Logic for adding territory to 
+    }
+
+    void InitialGameState()
+    {
+        List<Territory> territoryList = new List<Territory>();
+        
+        for (int c = 0; c < mapRef.continents.Count; c++) //search through each continent
+        {
+            for (int t = 0; t < mapRef.continents[c].territories.Count; t++) //go through each territory
+            {
+                territoryList.Add(mapRef.continents[c].territories[t]);
+                
+            }
+        }
+
+        int i = 0;
+        while (territoryList.Count > 0)
+        {
+            Territory t = territoryList[Random.Range(0, territoryList.Count)];
+            t.player = $"Player{i + 1}";
+            if (i == playerCount - 1)
+                i = 0;
+            else
+                i += 1;
+
+            territoryList.Remove(t);
+        }
     }
     
 

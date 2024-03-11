@@ -3,4 +3,4 @@ Alaska,1.5,-1
 NorthWestTerritories,3.5,-1.2,Alaska
 SouthAmerica,4
 Argentina,6,-8.5,NorthWestTerritories
-Brazil,6.8,-6.5,Argentina
+Brazil,6.8,-6.5,Argentina,Alaska
