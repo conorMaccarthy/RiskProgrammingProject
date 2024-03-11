@@ -17,6 +17,7 @@ public class Territory
         name = initName;
         player = initPlayer;
         currentArmyCount = initArmyCount;
+        adjacentTerritoryList = new List<Territory>();
     }
     public Territory(string initName, string initPlayer, float initXOffset, float initYOffset)
     {
@@ -24,6 +25,7 @@ public class Territory
         player = initPlayer;
         xOffset = initXOffset;
         yOffset = initYOffset;
+        adjacentTerritoryList = new List<Territory>();
     }
 
 }
