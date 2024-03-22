@@ -29,9 +29,11 @@ public class Map:MonoBehaviour //for unity visuals, I need some functions.
                 objectCount++;
                 if (drawPool.Count < objectCount)
                 {
-                    drawPool.Add(GameObject.CreatePrimitive(PrimitiveType.Sphere));
+                    var tempSphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+                    tempSphere.transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
+                    drawPool.Add(tempSphere);
                     var gO = drawPool[objectCount - 1];
-                    gO.transform.position = new Vector2(ter.xOffset,ter.yOffset);
+                    gO.transform.position = new Vector3(ter.xOffset,ter.yOffset, 1.25f);
                     switch (ter.player)
                     {
                         case "Player1":
@@ -118,8 +120,8 @@ public class Map:MonoBehaviour //for unity visuals, I need some functions.
     public void DrawLine(Territory start, Territory end)
     {
         GameObject newLine = Instantiate(drawnLinePrefab, Vector2.zero, Quaternion.identity);
-        newLine.GetComponent<LineRenderer>().SetPosition(0, new Vector2(start.xOffset, start.yOffset));
-        newLine.GetComponent<LineRenderer>().SetPosition(1, new Vector3(end.xOffset, end.yOffset,0));
+        newLine.GetComponent<LineRenderer>().SetPosition(0, new Vector3(start.xOffset, start.yOffset,1.1f));
+        newLine.GetComponent<LineRenderer>().SetPosition(1, new Vector3(end.xOffset, end.yOffset,1.1f));
         
     }
 }
