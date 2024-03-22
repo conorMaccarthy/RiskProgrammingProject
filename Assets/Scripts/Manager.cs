@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 using Debug = UnityEngine.Debug;
 
 public class Manager : MonoBehaviour
@@ -9,7 +11,7 @@ public class Manager : MonoBehaviour
     private int playerCount;
 
     Map mapRef;
-
+    Camera mainCam;
     Player[] player;
 
     void Start()
@@ -19,7 +21,7 @@ public class Manager : MonoBehaviour
 
         mapRef = GetComponent<Map>();
         mapRef.ReadMapFile();
-
+        mainCam = Camera.main;
 
 
         Player player = new Player();
@@ -116,6 +118,20 @@ public class Manager : MonoBehaviour
 
     void Update()
     {
-        
+        if (Input.GetMouseButtonDown(0) && !Input.GetMouseButtonUp(0))
+        {
+           MouseClick();
+           Debug.Log("Button Clicked");
+        }
+    }
+
+    void MouseClick()
+    {
+        Vector3 mousePosition = Input.mousePosition;
+        Ray ray = mainCam.ScreenPointToRay(mousePosition);
+        if (Physics.Raycast(ray, out RaycastHit hit))
+        {
+            Debug.Log(hit.transform.gameObject);
+        }
     }
 }
