@@ -4,15 +4,20 @@ using System.Diagnostics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 using Debug = UnityEngine.Debug;
 
 public class Manager : MonoBehaviour
 {
     private int playerCount;
+    private int currentPlayer = 1;
 
     Map mapRef;
     Camera mainCam;
     Player[] player;
+    TextMeshProUGUI playerText;
+
+    private GameObject endTurnButton;
 
     void Start()
     {
@@ -22,6 +27,9 @@ public class Manager : MonoBehaviour
         mapRef = GetComponent<Map>();
         mapRef.ReadMapFile();
         mainCam = Camera.main;
+        playerText = GetComponentInChildren<TextMeshProUGUI>();
+
+        endTurnButton = GameObject.Find("EndTurnBox");
 
 
         Player player = new Player();
@@ -123,6 +131,8 @@ public class Manager : MonoBehaviour
            MouseClick();
            Debug.Log("Button Clicked");
         }
+
+        playerText.text = "Player " + currentPlayer + " Turn:";
     }
 
     void MouseClick()
@@ -132,6 +142,13 @@ public class Manager : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
             Debug.Log(hit.transform.gameObject);
+            if (hit.transform.gameObject == endTurnButton) PlayerIncrement();
         }
+    }
+
+    void PlayerIncrement()
+    {
+        if (currentPlayer == playerCount) currentPlayer = 1;
+        else currentPlayer++;
     }
 }
