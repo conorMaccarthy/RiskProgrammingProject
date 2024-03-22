@@ -16,6 +16,7 @@ public class Manager : MonoBehaviour
     Camera mainCam;
     Player[] player;
     TextMeshProUGUI playerText;
+    TextMeshProUGUI actionText;
 
     private GameObject endTurnButton;
 
@@ -27,7 +28,8 @@ public class Manager : MonoBehaviour
         mapRef = GetComponent<Map>();
         mapRef.ReadMapFile();
         mainCam = Camera.main;
-        playerText = GetComponentInChildren<TextMeshProUGUI>();
+        playerText = transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>();
+        actionText = transform.GetChild(0).GetChild(2).GetComponent<TextMeshProUGUI>();
 
         endTurnButton = GameObject.Find("EndTurnBox");
 
