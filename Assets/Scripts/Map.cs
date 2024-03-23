@@ -30,6 +30,7 @@ public class Map:MonoBehaviour //for unity visuals, I need some functions.
                 if (drawPool.Count < objectCount)
                 {
                     var tempSphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+                    tempSphere.gameObject.name = ter.name;
                     tempSphere.transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
                     drawPool.Add(tempSphere);
                     var gO = drawPool[objectCount - 1];
@@ -75,8 +76,8 @@ public class Map:MonoBehaviour //for unity visuals, I need some functions.
                 if (peices.Length == 2)
                 {
                     indexContinent++;
-                    Debug.Log(peices[0]);
-                    Debug.Log(peices[1]);
+                    //Debug.Log(peices[0]);
+                    //Debug.Log(peices[1]);
                     continents.Add(new Continent(peices[0], int.Parse(peices[1])));
                 }
                 else if (peices.Length >= 3)
@@ -88,7 +89,7 @@ public class Map:MonoBehaviour //for unity visuals, I need some functions.
                         for (int i = 3; i < peices.Length; i++) //for every connection
                         {
                             target = FindTerritory(peices[i]);
-                            Debug.Log("ReadMap, Develop line from" + current.name + " to " + target.name);
+                            //Debug.Log("ReadMap, Develop line from" + current.name + " to " + target.name);
                             DrawLine(current, target);
                             current.adjacentTerritoryList.Add(target);
                             target.adjacentTerritoryList.Add(current);
@@ -102,7 +103,7 @@ public class Map:MonoBehaviour //for unity visuals, I need some functions.
         sR.Close();
     }
 
-    Territory FindTerritory(string targetName)
+    public Territory FindTerritory(string targetName)
     {
         for (int contCount = 0; contCount < continents.Count; contCount++) //seach each continent
         {

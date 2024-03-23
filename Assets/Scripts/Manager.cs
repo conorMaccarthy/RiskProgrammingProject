@@ -18,6 +18,8 @@ public class Manager : MonoBehaviour
     TextMeshProUGUI playerText;
     TextMeshProUGUI actionText;
 
+    Territory territarget1,territarget2;
+
     private GameObject endTurnButton;
 
     void Start()
@@ -87,7 +89,7 @@ public class Manager : MonoBehaviour
     //Cycle through the turns of active player count
     void PlayerTurn()
     {
-
+        territarget1 = null; territarget2 = null;
         player = new Player[playerCount];
         for (int i = 0; i <= playerCount; i++)
         {
@@ -145,6 +147,17 @@ public class Manager : MonoBehaviour
         {
             Debug.Log(hit.transform.gameObject);
             if (hit.transform.gameObject == endTurnButton) PlayerIncrement();
+            else if (territarget1 == null)
+            {
+                territarget1 = mapRef.FindTerritory(hit.transform.gameObject.name);
+                Debug.Log(territarget1.name + " territarget1");
+            } 
+            else if (territarget2 == null)
+            {
+                territarget2 = mapRef.FindTerritory(hit.transform.gameObject.name);
+                Debug.Log(territarget2.name + " territarget2");
+            }
+
         }
     }
 
